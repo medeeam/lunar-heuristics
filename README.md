@@ -85,6 +85,6 @@ Original project code: MIT license, see LICENSE. NASA/JPL data and linked resour
 
 ## Hosted deployment
 
-The public version uses the same interface and datasets with a Cloudflare Worker adapter in `worker/index.js`. It preserves the Python service’s validation, hourly sampling, source records, and sequential Sun/Earth requests. Successful queries are cached at the edge for 24 hours. No API keys are required.
+The public version uses the same interface and datasets with a Cloudflare Worker adapter in `worker/index.js`. It preserves the Python service’s validation, hourly sampling, source records, and sequential Sun/Earth requests. Successful queries use a bounded, best-effort in-memory cache per worker isolate and a 24-hour browser cache policy. No API keys are required.
 
 Run `npm run build` to produce a standalone `dist/server/index.js` with embedded public assets and the live ephemeris endpoint. Tests compare Worker results against the Python-generated NASA fixtures. Local Python development still works with `python3 server.py`.

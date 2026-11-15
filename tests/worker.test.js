@@ -28,3 +28,17 @@ test('deployment serves embedded assets and handles bad routes without NASA acce
   assert.equal((await worker.fetch(new Request('https://example.test/nope'))).status,404);
   assert.equal((await worker.fetch(new Request('https://example.test/',{method:'POST'}))).status,405);
 });
+test('live route does not require restricted platform cache access',async t=>{
+  const previous=Object.getOwnPropertyDescriptor(globalThis,'caches');
+  Object.defineProperty(globalThis,'caches',{configurable:true,get(){throw Error('Platform cache unavailable');}});
+  let calls=0;
+  t.mock.method(globalThis,'fetch',async()=>new Response(JSON.stringify({result:++calls===1?fixture.provenance.sun.raw:fixture.provenance.earth.raw})));
+  try {
+    const url='https://example.test/api/scenario?lat=-89.5&lon=0&start=2026-11-15&days=30';
+    const response=await worker.fetch(new Request(url));
+    assert.equal(response.status,200);
+    assert.deepEqual((await response.json()).samples,fixture.samples);
+    assert.equal((await worker.fetch(new Request(url))).status,200);
+    assert.equal(calls,2);
+  } finally {if(previous)Object.defineProperty(globalThis,'caches',previous);else delete globalThis.caches;}
+});

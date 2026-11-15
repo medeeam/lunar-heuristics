@@ -3,7 +3,9 @@ import { ASSETS } from './assets.generated.js';
 
 const HOUR = 3600000;
 const DAY = 86400000;
-let queue = Promise.resolve();
+// Sites dispatch Workers do not expose Cloudflare's default cache.
+// Keep a bounded, best-effort cache per isolate; browsers also receive max-age.
+const ephemerisCache = new Map();
 
 export function validateQuery(params) {
   for (const key of ['lat','lon','start','days']) {
@@ -62,14 +64,15 @@ export default {
     if(url.pathname==='/api/scenario'){
       if(request.method==='HEAD')return new Response(null,{status:405,headers:{Allow:'GET'}});
       let query;try{query=validateQuery(url.searchParams);}catch(error){return json({error:error.message},400);}
-      const key=new Request(url.origin+'/api/scenario?'+new URLSearchParams({lat:query.lat,lon:query.lon,start:query.start,days:query.days}));
-      const cache=globalThis.caches?.default;
-      const cached=await cache?.match(key);if(cached)return cached;
+      const key=JSON.stringify([query.lat,query.lon,query.start,query.days]);
+      const cached=ephemerisCache.get(key);
+      if(cached&&cached.expires>Date.now())return json(cached.data);
+      if(cached)ephemerisCache.delete(key);
       try {
-        const job=queue.then(()=>makeScenario(query));queue=job.catch(()=>{});
-        const result=json(await job);
-        if(cache&&ctx)ctx.waitUntil(cache.put(key,result.clone()));
-        return result;
+        const data=await makeScenario(query);
+        if(ephemerisCache.size>=32)ephemerisCache.delete(ephemerisCache.keys().next().value);
+        ephemerisCache.set(key,{data,expires:Date.now()+DAY});
+        return json(data);
       } catch {return json({error:'Could not reach NASA JPL. Retry, or use the bundled demo dates.'},502);}
     }
     const path=url.pathname==='/'?'/index.html':url.pathname;
