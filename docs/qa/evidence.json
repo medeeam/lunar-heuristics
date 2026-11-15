@@ -1,0 +1,19 @@
+{
+  "contract": "../design-contract.md: quantitative lunar explorer, truthful ephemerides, explicit geometric horizon, responsive desktop/mobile layouts.",
+  "targetViewports": ["1440x900", "390x844"],
+  "accessibility": {"status":"pass","evidence":"All inputs/selects have programmatic labels. Keyboard ArrowRight on the time range advanced the visible UTC hour; :focus-visible was true with a 2px outline. Charts have text alternatives. Reduced-motion CSS is present and automatic playback is off. Muted/body/mint text contrast against the main background exceeds 4.5:1. Mobile controls were visually checked; no viewport overflow."},
+  "responsive": {"status":"pass","evidence":"Browser viewport emulation confirmed 1440x900 and 390x844. documentElement.scrollWidth did not exceed innerWidth. Mobile controls stack, metrics use two columns, and the comparison table scrolls within its container. Removed a chart annotation that overlapped the Earth label on mobile."},
+  "contentStates": {
+    "loading":{"status":"pass","evidence":"Submitting a scenario immediately sets aria-busy=true and displays calculation status while disabling calculation/comparison controls."},
+    "empty":{"status":"pass","evidence":"Setting clearance to 10 degrees at Polar site A showed no simultaneous visibility and actionable date/site/clearance guidance."},
+    "error":{"status":"pass","evidence":"Injected upstream 502 in the browser: error message appeared and previous results remained displayed. Restored fetch and demo reset recovered successfully."},
+    "partial":{"status":"pass","evidence":"Used a live 16–23 December scenario and injected a 502 only for Polar site B during comparison. Two successful rows remained visible, the failing row was unavailable, and status reported one unavailable site. Restored networking and reset after the test."},
+    "success":{"status":"pass","evidence":"Three bundled references load and compare. Scrubbing changes time, opening an equatorial comparison changes active site, invalid latitude is rejected. Live custom -88N/15E and new December dates returned 169 samples. Captured CSV download contained 722 lines including its header."},
+    "permission":{"status":"not-applicable","reason":"The application has no account, browser permission, or external write operation. Downloads are generated locally."}
+  },
+  "renderedEvidence": [
+    {"viewport":"1440x900","artifact":"desktop.png","observation":"Desktop first viewport: scenario controls, selected site, Sun/Earth angles, horizon view, and timeline. No horizontal overflow or overlapping labels."},
+    {"viewport":"390x844","artifact":"mobile.png","observation":"Mobile scrolled view: local sky, timeline, keyboard focus ring on the slider, two-column metrics, and comparison action. No horizontal viewport overflow."}
+  ],
+  "limits": ["Software tests are not independent scientific validation.","No screen-reader session was performed; programmatic labels and text equivalents were inspected.","Reduced-motion CSS was checked; OS preference emulation was not available."]
+}
