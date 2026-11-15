@@ -17,6 +17,10 @@ python3 server.py
 
 `npm start` is an equivalent convenience command. The server binds only to 127.0.0.1. Do not expose this development server directly to the public internet.
 
+## Slide presentation
+
+[Seven-slide project demo (PDF)](https://lunar-heuristics.vercel.app/Lunar-Heuristics.pdf). The editable PowerPoint is in `docs/presentation/`.
+
 ## Try the demo
 
 1. Explore Polar site A, starting 15 November 2026, for 30 days.

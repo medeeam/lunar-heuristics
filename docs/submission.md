@@ -2,7 +2,8 @@
 
 ## Published links
 
-- Live demo: https://lunar-heuristics.vercel.app
+- Project demo (seven-slide PDF): https://lunar-heuristics.vercel.app/Lunar-Heuristics.pdf
+- Final project: https://lunar-heuristics.vercel.app
 - Source code: https://github.com/medeeam/lunar-heuristics
 
 ## Short summary
@@ -15,11 +16,11 @@ Lunar site selection involves a trade-off between scientific interest, solar acc
 
 ## Our solution
 
-We built a browser-based scenario explorer with a dependency-free Python data service. The interface brings site coordinates, date selection, a local-sky diagram, an elevation timeline, and a comparison table into one workflow. Users can scrub time, explore a uniform horizon obstruction, inspect joint visibility windows, and export the numerical results.
+We built a browser-based scenario explorer with a hosted JavaScript API and a dependency-free Python service for local use. The interface brings site coordinates, date selection, a local-sky diagram, an elevation timeline, and a comparison table into one workflow. Users can scrub time, explore a uniform horizon obstruction, inspect joint visibility windows, and export the numerical results.
 
 ## NASA data used
 
-The application uses actual NASA/JPL Horizons observer ephemerides for the Sun and Earth, as viewed from user-selected coordinates on the Moon. Each result preserves its original API parameters and raw source response. Three illustrative coordinate sets have a bundled 30-day dataset for a reliable offline demonstration. Custom coordinates and dates query Horizons through the local service.
+The application uses actual NASA/JPL Horizons observer ephemerides for the Sun and Earth, as viewed from user-selected coordinates on the Moon. Each result preserves its original API parameters and raw source response. Three illustrative coordinate sets have a bundled 30-day dataset for a reliable offline demonstration. Custom coordinates and dates query Horizons through the hosted API or local service.
 
 ## What makes the approach useful
 
@@ -33,19 +34,24 @@ This prototype uses a geometric reference-surface horizon and hourly sampling. I
 
 Python standard library, curl, JavaScript ES modules, HTML, CSS and SVG. No proprietary API key or frontend package installation is required.
 
-## 90-second demonstration script
+## Seven-slide project demo
 
-1. **0–15 seconds:** “At the lunar south pole, seeing the Sun and seeing Earth are two different constraints. Lunar Heuristics makes that trade-off visible.”
-2. **15–35 seconds:** Show Polar site A, explain the real JPL source, and scrub the timeline. Point to the two elevation values and the geometric horizon.
-3. **35–50 seconds:** Raise clearance from 0° to 2°. Explain that this is a sensitivity experiment, not measured terrain. Show the changed joint windows.
-4. **50–70 seconds:** Compare the reference sites and open the equatorial reference. Explain that the same date window makes the trade-offs comparable.
-5. **70–85 seconds:** Download a CSV and open the methodology/provenance section. State the terrain and hourly-sampling limitations.
-6. **85–90 seconds:** “Our next step is adding LOLA-derived terrain horizons so local topography becomes part of every comparison.”
+Use `docs/presentation/Lunar-Heuristics.pdf` as the slide demo. The editable PowerPoint is `docs/presentation/Lunar-Heuristics.pptx`. The deck has seven slides including the title and sources; no video is needed for this format.
+
+1. Title and purpose
+2. The lunar visibility problem
+3. Working application screenshot and workflow
+4. NASA data and calculation method
+5. Site comparison results
+6. Benefits, limitations and next steps
+7. Team, sources and project links
+
+Host the PDF at a publicly accessible URL and put that URL in the project demo field. The working application URL goes in the separate final-project field.
 
 ## Before final submission
 
 - Copy the published source and demo URLs above into the project submission form.
-- Record a short demo and add its link if the submission form requests one.
+- Publish the seven-slide PDF and add its public URL to the project demo field.
 - Review the narrative against the final implementation and list actual team contributions.
 - Cite the data and tools required by the competition's submission rules; do not claim ingestion of LOLA or Moon Trek data.
 - Review the official submission fields and requirements before submitting.

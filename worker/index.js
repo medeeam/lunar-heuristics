@@ -77,6 +77,6 @@ export default {
     const path=url.pathname==='/'?'/index.html':url.pathname;
     const asset=ASSETS[path];
     if(!asset)return new Response('Not found',{status:404});
-    return new Response(request.method==='HEAD'?null:asset.body,{headers:{'Content-Type':asset.type,'Cache-Control':path.endsWith('.json')?'public, max-age=86400':'public, max-age=300','X-Content-Type-Options':'nosniff','Referrer-Policy':'strict-origin-when-cross-origin'}});
+    return new Response(request.method==='HEAD'?null:(asset.base64?Uint8Array.from(atob(asset.body),c=>c.charCodeAt(0)):asset.body),{headers:{'Content-Type':asset.type,'Cache-Control':path.endsWith('.json')?'public, max-age=86400':'public, max-age=300','X-Content-Type-Options':'nosniff','Referrer-Policy':'strict-origin-when-cross-origin'}});
   }
 };
