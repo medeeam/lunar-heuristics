@@ -2,7 +2,7 @@
 
 ## Published links
 
-- Live demo: https://lunar-heuristics-medeeam.quirkybarracuda3.chatgpt.site
+- Live demo: https://lunar-heuristics.vercel.app
 - Source code: https://github.com/medeeam/lunar-heuristics
 
 ## Short summary

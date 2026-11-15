@@ -1,21 +1,20 @@
 # Published deployment
 
-- Demo: https://lunar-heuristics-medeeam.quirkybarracuda3.chatgpt.site
+- Demo: https://lunar-heuristics.vercel.app
 - Public source: https://github.com/medeeam/lunar-heuristics
-- Hosted with Sites on Cloudflare Workers; no sign-in required.
-- Published version: 2, on 15 November 2026.
-- Runtime source corresponds to GitHub commit `87cee12` (later documentation-only commits add these links).
+- Hosted on Vercel; no sign-in required.
+- Verified on 15 November 2026, with runtime source at commit `a753841`.
 
 ## Verification
 
-The public page loaded in an isolated browser context with all three reference comparisons. A live request for latitude −88°, longitude +15°, starting 16 November 2026 for 7 days returned HTTP 200 and 169 paired NASA/JPL samples. No login was required. Thirteen automated tests passed, including a regression for the restricted platform cache.
-
-The first deployment exposed a platform restriction on `caches.default`; version 2 uses a bounded in-memory cache instead. Sun/Earth requests remain sequential per scenario. Memory caching is best-effort and may be reset whenever a worker isolate is retired.
+The production page loaded in an isolated browser context with all three reference comparisons. A live request for latitude −88°, longitude +15°, starting 16 November 2026 for 7 days returned HTTP 200 and 169 paired NASA/JPL samples. No login was required. Fourteen automated tests passed before deployment, including the Vercel adapter and bounded-cache regression.
 
 ## Build and update
 
-`npm run build` produces a self-contained ES module at `dist/server/index.js`. It embeds the public assets and exports a fetch handler. The Python server remains the local development entry point.
+Vercel imports `medeeam/lunar-heuristics` and deploys the `main` branch. The project uses the Other framework preset. `vercel.json` sets `npm run build` as the build command and `public` as the output directory.
 
-The local hosting checkout is kept separately under ignored `.deployment/lunar-heuristics/`. Its `.openai/hosting.json` identifies the existing Site. Reuse that identity when updating; do not create another Site. Use Sites' source workflow to build, push, package, save and deploy a new version. Never commit hosting credentials or the deployment staging directory to GitHub.
+The build produces `dist/server/index.js`, a self-contained fetch handler. `api/scenario.js` exposes the live endpoint as a Vercel Node function with a 60-second maximum duration. The Python server remains the local development entry point.
+
+Sun/Earth requests are sequential per scenario. Successful queries use a bounded, best-effort memory cache and a 24-hour browser cache policy. Runtime restarts may reset the memory cache. No API keys or environment secrets are required. Never commit hosting credentials.
 
 The application does not yet include measured terrain horizons. NASA upstream outages may prevent custom calculations; bundled reference data remains available.

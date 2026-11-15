@@ -2,7 +2,7 @@
 
 A working NASA Space Apps 2026 **Lunar Landing Site Navigator** prototype. Compare Sun and Earth visibility at lunar coordinates using actual NASA/JPL Horizons ephemerides.
 
-**[Open the public demo](https://lunar-heuristics-medeeam.quirkybarracuda3.chatgpt.site)** · **[Source repository](https://github.com/medeeam/lunar-heuristics)**
+**[Open the public demo](https://lunar-heuristics.vercel.app)** · **[Source repository](https://github.com/medeeam/lunar-heuristics)**
 
 ![Lunar Heuristics interface](docs/qa/desktop.png)
 
@@ -26,7 +26,7 @@ python3 server.py
 5. Download CSV data and the raw provenance record from Data & methodology.
 6. Enter custom coordinates or dates and calculate a new live JPL scenario.
 
-The three presets are illustrative sample coordinates, not terrain-derived or approved landing sites. Preset data for 15 November–15 December 2026 is bundled and works without an internet connection once the site is served. Other locations and date ranges need internet access through the Python server. Results remain visible if a new request fails.
+The three presets are illustrative sample coordinates, not terrain-derived or approved landing sites. Preset data for 15 November–15 December 2026 is bundled and works without an internet connection once the site is served. Other locations and date ranges need internet access through the local Python server or hosted API. Results remain visible if a new request fails.
 
 ## What is implemented
 
@@ -88,6 +88,6 @@ Original project code: MIT license, see LICENSE. NASA/JPL data and linked resour
 
 ## Hosted deployment
 
-The public version uses the same interface and datasets with a Cloudflare Worker adapter in `worker/index.js`. It preserves the Python service’s validation, hourly sampling, source records, and sequential Sun/Earth requests. Successful queries use a bounded, best-effort in-memory cache per worker isolate and a 24-hour browser cache policy. No API keys are required.
+The public version uses the same interface and datasets on Vercel, with `api/scenario.js` adapting the fetch handler in `worker/index.js`. It preserves the Python service’s validation, hourly sampling, source records, and sequential Sun/Earth requests. Successful queries use a bounded, best-effort in-memory cache per runtime instance and a 24-hour browser cache policy. No API keys are required.
 
-Run `npm run build` to produce a standalone `dist/server/index.js` with embedded public assets and the live ephemeris endpoint. Tests compare Worker results against the Python-generated NASA fixtures. Local Python development still works with `python3 server.py`.
+Run `npm run build` to produce a standalone `dist/server/index.js` with embedded public assets and the live ephemeris endpoint. Tests compare hosted-handler results against the Python-generated NASA fixtures. Local Python development still works with `python3 server.py`.
