@@ -3,8 +3,7 @@ import { ASSETS } from './assets.generated.js';
 
 const HOUR = 3600000;
 const DAY = 86400000;
-// Sites dispatch Workers do not expose Cloudflare's default cache.
-// Keep a bounded, best-effort cache per isolate; browsers also receive max-age.
+// Keep a bounded, best-effort cache per runtime instance.
 const ephemerisCache = new Map();
 
 export function validateQuery(params) {
@@ -39,7 +38,7 @@ async function fetchBody(body, query, fetcher) {
   const parameters={format:'json',COMMAND:String(body),OBJ_DATA:'NO',MAKE_EPHEM:'YES',EPHEM_TYPE:'OBSERVER',CENTER:'coord@301',COORD_TYPE:'GEODETIC',SITE_COORD:`${lon},${lat},0`,START_TIME:start,STOP_TIME:new Date(time+days*DAY).toISOString().slice(0,10),STEP_SIZE:'1 h',QUANTITIES:'4',CSV_FORMAT:'YES',CAL_FORMAT:'JD',APPARENT:'AIRLESS'};
   const params=new URLSearchParams(Object.entries(parameters).map(([k,v])=>[k,k==='format'?v:`'${v}'`]));
   const url='https://ssd.jpl.nasa.gov/api/horizons.api?'+params;
-  const response=await fetcher(url,{headers:{Accept:'application/json'},signal:AbortSignal.timeout(40000)});
+  const response=await fetcher(url,{headers:{Accept:'application/json'},signal:AbortSignal.timeout(25000)});
   if(!response.ok)throw Error('NASA JPL is temporarily unavailable.');
   const payload=await response.json();
   return {samples:parseHorizons(payload),provenance:{url,parameters,raw:payload.result}};

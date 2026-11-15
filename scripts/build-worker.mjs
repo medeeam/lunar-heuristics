@@ -1,4 +1,4 @@
-import {readFile,writeFile,mkdir,readdir,copyFile,stat} from 'node:fs/promises';
+import {readFile,writeFile,mkdir,readdir} from 'node:fs/promises';
 import {resolve,relative,extname} from 'node:path';
 
 const root=resolve(import.meta.dirname,'..');
@@ -10,6 +10,4 @@ await walk(publicDir);
 const worker=(await readFile(resolve(root,'worker/index.js'),'utf8')).replace("import { ASSETS } from './assets.generated.js';",()=>`const ASSETS = ${JSON.stringify(assets)};`);
 await mkdir(resolve(root,'dist/server'),{recursive:true});
 await writeFile(resolve(root,'dist/server/index.js'),worker);
-const manifest=resolve(root,'.openai/hosting.json');
-if(await stat(manifest).catch(()=>null)){await mkdir(resolve(root,'dist/.openai'),{recursive:true});await copyFile(manifest,resolve(root,'dist/.openai/hosting.json'));}
 console.log(`Built ${Object.keys(assets).length} assets and Horizons endpoint (${Buffer.byteLength(worker)} bytes).`);
