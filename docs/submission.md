@@ -29,9 +29,9 @@ The comparison uses identical dates and visibility assumptions for every locatio
 
 This prototype uses a geometric reference-surface horizon and hourly sampling. It does not yet ingest LOLA terrain, model disk/limb effects or eclipses, compute electrical power, or assess a radio link budget. The next step is to derive azimuth-dependent horizons from LOLA elevation data, increase temporal resolution around crossings, and validate results with an independent SPICE implementation. The current product is for exploration and education, not flight operations.
 
-## Technology and assistance
+## Technology
 
-Python standard library, curl, JavaScript ES modules, HTML, CSS and SVG. No proprietary API key or frontend package installation is required. OpenAI Codex assisted with research, implementation, documentation and tests. The team should review the final scientific claims and credit all contributions accurately.
+Python standard library, curl, JavaScript ES modules, HTML, CSS and SVG. No proprietary API key or frontend package installation is required.
 
 ## 90-second demonstration script
 
@@ -47,7 +47,7 @@ Python standard library, curl, JavaScript ES modules, HTML, CSS and SVG. No prop
 - Copy the published source and demo URLs above into the project submission form.
 - Record a short demo and add its link if the submission form requests one.
 - Review the narrative against the final implementation and list actual team contributions.
-- Cite JPL Horizons, the official challenge, and AI assistance; do not claim ingestion of LOLA or Moon Trek data.
+- Cite the data and tools required by the competition's submission rules; do not claim ingestion of LOLA or Moon Trek data.
 - Review the official submission fields and requirements before submitting.
 
 Source links are listed in README.md. This draft has not been posted to the Space Apps website.

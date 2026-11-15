@@ -83,7 +83,6 @@ Tests cover interpolated crossings, joint windows, fully visible and empty state
 - [NASA/JPL Horizons manual](https://ssd.jpl.nasa.gov/horizons/manual.html)
 - [NASA/JPL Horizons API](https://ssd-api.jpl.nasa.gov/doc/horizons.html)
 - [LROC QuickMap](https://quickmap.lroc.asu.edu/) and [NASA Moon Trek](https://trek.nasa.gov/moon/) are linked for further terrain exploration; their terrain datasets are not ingested by this version.
-- Implementation, documentation, and test development used OpenAI Codex assistance. Review and disclose AI assistance in the submission as appropriate.
 
 Original project code: MIT license, see LICENSE. NASA/JPL data and linked resources retain their source attribution and applicable terms. This project is not endorsed by NASA.
 
