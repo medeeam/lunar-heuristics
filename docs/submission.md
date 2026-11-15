@@ -1,5 +1,10 @@
 # Lunar Heuristics — submission draft
 
+## Published links
+
+- Live demo: https://lunar-heuristics-medeeam.quirkybarracuda3.chatgpt.site
+- Source code: https://github.com/medeeam/lunar-heuristics
+
 ## Short summary
 
 Lunar Heuristics turns NASA/JPL ephemerides into an interactive comparison of lunar lighting and Earth visibility. Choose a location and date, move through time, and compare how long the Sun and Earth remain above the horizon together. It helps explain why a small change in location, schedule, or horizon clearance can change a mission's operating opportunities.
@@ -39,7 +44,7 @@ Python standard library, curl, JavaScript ES modules, HTML, CSS and SVG. No prop
 
 ## Before final submission
 
-- Add the public source repository URL and a reachable demo URL (neither has been published yet).
+- Copy the published source and demo URLs above into the project submission form.
 - Record a short demo and add its link if the submission form requests one.
 - Review the narrative against the final implementation and list actual team contributions.
 - Cite JPL Horizons, the official challenge, and AI assistance; do not claim ingestion of LOLA or Moon Trek data.

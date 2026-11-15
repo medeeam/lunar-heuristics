@@ -2,6 +2,10 @@
 
 A working NASA Space Apps 2026 **Lunar Landing Site Navigator** prototype. Compare Sun and Earth visibility at lunar coordinates using actual NASA/JPL Horizons ephemerides.
 
+**[Open the public demo](https://lunar-heuristics-medeeam.quirkybarracuda3.chatgpt.site)** · **[Source repository](https://github.com/medeeam/lunar-heuristics)**
+
+![Lunar Heuristics interface](docs/qa/desktop.png)
+
 ## Run locally
 
 Requirements: Python 3.10+ and curl. Node 22+ is needed only for JavaScript tests and the optional npm command aliases. No package installation or API key is required.
